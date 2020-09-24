@@ -56,6 +56,8 @@ export default class Title extends emailComponent {
   };
 
   render() {
+    let title;
+    let date;
     let content;
     let computedStyles = {
       title: {
@@ -91,19 +93,18 @@ export default class Title extends emailComponent {
     if (this.props.isText) {
       content = (
         <>
-          {this.props.data.title} - {this.props.data.date}
+          {this.props.data?.title} - {this.props.data?.date}
         </>
       );
     } else {
-      let title;
-      let date;
+      
 
       title = (
         <span
           key="title"
           style={computedStyles.title.span}
         >
-          {this.props.data.title}
+          {this.props.data?.title}
         </span>
       );
       date = (
@@ -111,7 +112,7 @@ export default class Title extends emailComponent {
           key="date"
           style={computedStyles.date.span}
         >
-          {this.props.data.date}
+          {this.props.data?.date}
         </span>
       );
     }
@@ -143,9 +144,7 @@ export default class Title extends emailComponent {
 
     return (
       <Table style={computedStyles.table} isText={this.props.isText}>
-        <Row style={computedStyles.row} isText={this.props.isText}>
           {content}
-        </Row>
       </Table>
     );
   }

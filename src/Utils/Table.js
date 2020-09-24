@@ -39,7 +39,7 @@ export default class Table extends emailComponent {
     if (this.props.isText) {
       output = <>{content}</>;
     } else {
-      let computedStyle = { ...defaultStyle, ...this.props.style };
+      let computedStyle = { ...this.defaultStyle, ...this.props.style };
       output = (
         <table
           width={computedStyle.width}

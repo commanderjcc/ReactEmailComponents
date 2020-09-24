@@ -1,9 +1,21 @@
 import React from 'react';
 
+import Img from "./Blocks/Img";
+import Link from "./Blocks/Link";
+import Paragraph from "./Blocks/Paragraph";
+import Quote from "./Blocks/Quote";
+import Signature from "./Blocks/Signature";
+import Title from "./Blocks/Title";
+import Unsubscribe from "./Blocks/Unsubscribe";
+
+import Table from "./Utils/Table";
+import Row from "./Utils/Row";
+import Cell from "./Utils/Cell";
+
 export default class emailComponent extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+  // constructor(props) {
+  //   super(props)
+  // }
 
   tableLevel = false
 
@@ -24,7 +36,7 @@ export default class emailComponent extends React.Component {
         return;
     }
 
-    const children = this.props.content.map((block) => {
+    const children = content.map((block) => {
       let output;
       let shorthand = this.tableLevel;
       switch (block.type ?? block.t) {

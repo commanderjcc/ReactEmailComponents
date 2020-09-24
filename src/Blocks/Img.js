@@ -59,34 +59,34 @@ export default class Img extends emailComponent {
     let computedStyles = {
       caption: {
         span: {
-          ...defaultStyle.caption?.span,
+          ...this.defaultStyle.caption?.span,
           ...this.props.style?.caption?.span,
         },
         row: {
-          ...defaultStyle.caption?.row,
+          ...this.defaultStyle.caption?.row,
           ...this.props.style?.caption?.row,
         },
         cell: {
-          ...defaultStyle.caption?.cell,
+          ...this.defaultStyle.caption?.cell,
           ...this.props.style?.caption?.cell,
         },
       },
       image: {
         img: {
-          ...defaultStyle.image?.img,
+          ...this.defaultStyle.image?.img,
           ...this.props.style?.image?.img,
         },
         row: {
-          ...defaultStyle.image?.row,
-          ...this.props?.style.image?.row,
+          ...this.defaultStyle.image?.row,
+          ...this.props.style?.image?.row,
         },
         cell: {
-          ...defaultStyle.image?.cell,
+          ...this.defaultStyle.image?.cell,
           ...this.props.style?.image?.cell,
         },
       },
       table: {
-        ...defaultStyle.table,
+        ...this.defaultStyle.table,
         ...this.props.style?.table,
       },
     };
@@ -97,7 +97,7 @@ export default class Img extends emailComponent {
       }
       return (
         <Row isText={this.props.isText}>
-          Photo: {this.props.data.alt}
+          Photo: {this.props.data?.alt}
           {caption}
         </Row>
       );
@@ -115,8 +115,8 @@ export default class Img extends emailComponent {
           <img
             key="img"
             style={computedStyles.image?.img}
-            alt={this.props.data.alt || ""}
-            src={this.props.data.src}
+            alt={this.props.data?.alt || ""}
+            src={this.props.data?.src}
           />
         );
       }

@@ -29,42 +29,6 @@ export default class PreviewRoot extends emailComponent {
   };
 
   render() {
-    {
-      /*const emailContent = this.props.content.map((block) => {
-      let output;
-      let shorthand = true;
-      switch (block.type) {
-        case 'table':
-          shorthand = false;
-          output = Table.selfAssemble
-        case 'Img':
-          output = <Img style={block.style.content} data={block.data} isText={this.props.isText}/>
-          break;
-        case 'Link':
-          output = <Link />
-          break;
-        case 'Paragraph':
-          output = <Paragraph style={block.style.content} data={block.data} isText={this.props.isText}/>
-          break;
-        case 'Quote':
-          output = <Quote />
-          break;
-        case 'Signature':
-          output = <Signature />
-          break;
-        case 'Title':
-          output = <Title style={block.style.content} data={block.data} isText={this.props.isText}/>
-          break;
-        case 'Unsubscribe':
-          output = <Unsubscribe user={this.props.user} style={block.style.content} data={block.data} isText={this.props.isText}/>
-          break;
-        default:
-          return null;
-      }
-      return (<Row key={block.uuid} style={block.style.parentRow} isText={this.props.isText}>{output}</Row>)
-    });
-  */
-    }
 
     let output;
     let children = this.props.children ?? this.parseContent(this.props.content);

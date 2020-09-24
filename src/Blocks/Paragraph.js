@@ -35,7 +35,7 @@ export default class Paragraph extends emailComponent {
       }
       content = <>{text}</>
     } else { 
-      if (p.indented) {
+      if (this.props.data?.indented) {
         text = "&emsp;" + text;
       }
       content = <p

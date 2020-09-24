@@ -38,7 +38,7 @@ export default class Row extends emailComponent {
     if (this.props.isText) {
       output = <>{content}\n\n</>;
     } else {
-      let computedStyle = { ...defaultStyle, ...this.props.style };
+      let computedStyle = { ...this.defaultStyle, ...this.props.style };
       output = <tr style={computedStyle}>{content}</tr>;
     }
 

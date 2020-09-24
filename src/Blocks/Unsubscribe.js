@@ -18,8 +18,8 @@ export default class Unsubscribe extends emailComponent {
   };
 
   render() {
-    if (!this.props.user.airtableID) {
-      return;
+    if (!this.props.user?.airtableID) {
+      return null;
     }
 
     let computedStyles = {
