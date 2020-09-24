@@ -4,18 +4,16 @@
   "description": "A package containing React Components to be used in other projects.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run compile && npm run compile-test && npm run build-test",
+    "compile": "babel src -d lib",
+    "compile-test": "babel test/src -d test/lib",
+    "build-test": "webpack --config testing-webpack.config.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/commanderjcc/ReactEmailComponents.git"
   },
-  "keywords": [
-    "react",
-    "email",
-    "components",
-    "selfassesmbly"
-  ],
+  "keywords": [],
   "author": "commanderjcc",
   "license": "ISC",
   "bugs": {
@@ -23,6 +21,7 @@
   },
   "homepage": "https://github.com/commanderjcc/ReactEmailComponents#readme",
   "dependencies": {
+    "he": "^1.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
@@ -31,7 +30,7 @@
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
-    "webpack": "^4.44.1",
+    "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
     "webpack-node-externals": "^2.5.2"
   },

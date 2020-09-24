@@ -1,46 +1,47 @@
-import React from 'react';
+import React from "react";
+import emailComponent from "../emailComponent";
 
-export default class Row extends React.Component {
+import Cell from "./Cell";
+
+export default class Row extends emailComponent {
   constructor(props) {
     super(props);
-    
   }
-  
+
+  tableLevel = "row";
+
+  defaultStyle = {};
+
+  // static selfAssemble(block, isText, shorthand = true) {
+  //   block.data.__shorthand = shorthand;
+  //   return super.selfAssemble(block, isText);
+  // }
+
   render() {
     let output;
-    if (this.props.isText) {
-      output = <>{this.props.children}\n\n</>
-    } else {
-      let content;
-      if(Array.isArray(this.props.children)) {
-        content = this.props.children.map((element, index) => {
-          let colSpan;
-          if (this.props.style.cells[index].colSpan) {
-            colSpan = this.props.style.cells[index].colSpan;
-          } else {
-            colSpan = this.props.fullWidth ? 999 : 1;
-          }
-          return (<td key={element.props.uuid} colSpan={colSpan} style={this.props.style.cells[index].style}>
-                    {element}
-                  </td>
-          );
-        });
-      } else {
-        let colSpan;
-        if (this.props.style.cells[0].colSpan) {
-          colSpan = this.props.style.cells[0].colSpan;
-        } else {
-          colSpan = this.props.fullWidth ? 999 : 1;
-        }
-        content = <td colSpan={colSpan} style={this.props.style.cells[0].style}>
-                    {this.props.children}
-                  </td>;
-      }
-      output = <tr style={this.props.style.rowStyle}>
-                 {content}
-               </tr> 
+    let children = this.props.children ?? this.parseContent(this.props.content);
+
+    if (!Array.isArray(children)) {
+      children = [children];
     }
-    
+
+    let content = children.map((element) => {
+      if (element.props?.shorthand) {
+        return (
+          <Cell isText={this.props.isText}>{element}</Cell>
+        );
+      } else {
+        return element;
+      }
+    });
+
+    if (this.props.isText) {
+      output = <>{content}\n\n</>;
+    } else {
+      let computedStyle = { ...defaultStyle, ...this.props.style };
+      output = <tr style={computedStyle}>{content}</tr>;
+    }
+
     return output;
   }
 }

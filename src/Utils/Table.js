@@ -1,24 +1,59 @@
-import React from 'react';
+import React from "react";
+import emailComponent from "../emailComponent";
 
-export default class Table extends React.Component {
+export default class Table extends emailComponent {
   constructor(props) {
     super(props);
-    
   }
-  
+
+  tableLevel = "table";
+
+  defaultStyle = {
+    width: "100%",
+    height: "100%",
+    borderCollapse: "collapse",
+    borderSpacing: 0,
+    padding: 0,
+  };
+
   render() {
     let output;
+    let children = this.props.children ?? this.parseContent(this.props.content);
 
-    if(this.props.isText) {
-      output = <>{this.props.children}</>
-    } else {
-      output = <table border="0" cellSpacing="0" cellPadding="0" style={{...{width: '100%', height: '100%', borderCollapse: 'collapse', borderSpacing: 0, padding: 0}, ...this.props.style}}>
-                  <tbody>
-                    {this.props.children}
-                  </tbody>
-                </table>  
+    if (!Array.isArray(children)) {
+      children = [children];
     }
-    
+
+    let content = children.map((element) => {
+      if (element.props?.shorthand) {
+        return (
+          <Row isText={this.props.isText}>
+            <Cell isText={this.props.isText}>{element}</Cell>
+          </Row>
+        );
+      } else {
+        return element;
+      }
+    });
+
+    if (this.props.isText) {
+      output = <>{content}</>;
+    } else {
+      let computedStyle = { ...defaultStyle, ...this.props.style };
+      output = (
+        <table
+          width={computedStyle.width}
+          height={computedStyle.height}
+          border={computedStyle.borderWidth}
+          cellSpacing={computedStyle.borderSpacing}
+          cellPadding="0"
+          style={computedStyle}
+        >
+          <tbody>{content}</tbody>
+        </table>
+      );
+    }
+ 
     return output;
   }
 }
