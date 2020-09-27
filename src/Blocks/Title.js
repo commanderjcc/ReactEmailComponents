@@ -1,30 +1,10 @@
 import React from 'react';
 
-import Table from '../Utils/Table';
-import Row from '../Utils/Row';
-import emailComponent from '../emailComponent';
-import Cell from '../Utils/Cell';
-import { createPortal } from 'react-dom';
+import { emailComponent, Table, Row, Cell } from "../internals";
 
-export default class Title extends emailComponent {
+export class Title extends emailComponent {
   constructor(props) {
     super(props);
-  }
-
-  static selfAssemble(block, isText, shorthand = this.tableLevel) {
-    let saved_shorthand = shorthand;
-    if (shorthand === "table", shorthand === "row") {
-      shorthand = false;
-    }
-
-    return React.createElement(this, {
-      content: block.content ?? block.c ?? {},
-      data: block.data ?? block.d ?? {},
-      style: block.style ?? block.s ?? this.defaultStyle ?? {},
-      shorthand: block.data?.__shorthand ?? shorthand,
-      saved_shorthand: saved_shorthand,
-      isText: isText,
-    });
   }
 
   defaultStyle = {
@@ -51,7 +31,9 @@ export default class Title extends emailComponent {
         fontWeight: 500,
       }
     },
-    row: {},
+    row: {
+      width: "100%",
+    },
     table: {},
   };
 

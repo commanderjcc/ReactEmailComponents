@@ -1,20 +1,8 @@
 import React from "react";
-import ReactDOMServer from "react-dom/server";
 
-import Img from "../Blocks/Img";
-import ImgGrid from "../Blocks/ImgGrid";
-import Link from "../Blocks/Link";
-import Paragraph from "../Blocks/Paragraph";
-import Quote from "../Blocks/Quote";
-import Signature from "../Blocks/Signature";
-import Title from "../Blocks/Title";
-import Unsubscribe from "../Blocks/Unsubscribe";
+import {emailComponent, Table, Row, Cell} from "../internals";
 
-import Table from "./Table";
-import Row from "./Row";
-import emailComponent from "../emailComponent";
-
-export default class PreviewRoot extends emailComponent {
+export class ViewRoot extends emailComponent {
   constructor(props) {
     super(props);
   }
@@ -38,7 +26,7 @@ export default class PreviewRoot extends emailComponent {
     }
 
     let content = children.map((element) => {
-      if (element.props?.shorthand) {
+      if (element?.props?.shorthand) {
         return (
           <Row isText={this.props.isText}>
             <Cell isText={this.props.isText}>{element}</Cell>
@@ -55,20 +43,22 @@ export default class PreviewRoot extends emailComponent {
       let computedStyle = { ...this.defaultStyle, ...this.props.style };
       output = (
         <html>
-          <Table isText={this.props.isText}>
-            <tr>
-              <td></td>
-              <td
-                width={computedStyle.width}
-                bgcolor={computedStyle.backgroundColor}
-                style={computedStyle}
-                align="center"
-              >
-                <Table isText={this.props.isText}>{content}</Table>
-              </td>
-              <td></td>
-            </tr>
-          </Table>
+          <body>
+            <Table isText={this.props.isText}>
+              <tr>
+                <td></td>
+                <td
+                  width={computedStyle.width}
+                  bgcolor={computedStyle.backgroundColor}
+                  style={computedStyle}
+                  align="center"
+                >
+                  <Table isText={this.props.isText}>{content}</Table>
+                </td>
+                <td></td>
+              </tr>
+            </Table>
+          </body>
         </html>
       );
     }

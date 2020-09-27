@@ -1,7 +1,7 @@
 import React from "react";
-import emailComponent from "../emailComponent";
+import {emailComponent, Row, Cell} from "../internals";
 
-export default class Table extends emailComponent {
+export class Table extends emailComponent {
   constructor(props) {
     super(props);
   }
@@ -19,13 +19,12 @@ export default class Table extends emailComponent {
   render() {
     let output;
     let children = this.props.children ?? this.parseContent(this.props.content);
-
     if (!Array.isArray(children)) {
       children = [children];
     }
 
     let content = children.map((element) => {
-      if (element.props?.shorthand) {
+      if (element?.props?.shorthand) {
         return (
           <Row isText={this.props.isText}>
             <Cell isText={this.props.isText}>{element}</Cell>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Signature extends React.Component {
+export class Signature extends React.Component {
   constructor(props) {
     super(props);
     

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Quote extends React.Component {
+export class Quote extends React.Component {
   constructor(props) {
     super(props);
     

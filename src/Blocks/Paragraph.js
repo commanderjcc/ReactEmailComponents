@@ -1,15 +1,8 @@
 import React from "react";
-import he from 'he';
-// import { renderToStaticMarkup } from "react-dom/server";
 
-import Row from "../Utils/Row";
-import Table from "../Utils/Table";
-import hasher from "../Utils/hasher";
-import emailComponent from "../emailComponent";
+import { emailComponent } from "../internals";
 
-//TODO: Refactor so that each Paragraph object represents 1 paragraph, will stop all the useless <br/>s and such.
-
-export default class Paragraph extends emailComponent {
+export class Paragraph extends emailComponent {
   constructor(props) {
     super(props);
   }
@@ -17,8 +10,9 @@ export default class Paragraph extends emailComponent {
   defaultStyle = {
     fontFamily:
       "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif",
-    fontSize: "14px"
-  }
+    fontSize: "14px",
+    padding: "0 20px",
+  };
 
   render() {
     let content;
@@ -27,21 +21,23 @@ export default class Paragraph extends emailComponent {
     let computedStyles = {
       ...this.defaultStyle,
       ...this.props.style,
-    }
-    
+    };
+
     if (this.props.isText) {
-      if (this.props.data?.indented) {
+      if (this.props.data?.indented ?? true) {
         text = "\t" + text;
       }
-      content = <>{text}</>
-    } else { 
-      if (this.props.data?.indented) {
+      content = <>{text}</>;
+    } else {
+      if (this.props.data?.indented ?? true) {
         text = "&emsp;" + text;
       }
-      content = <p
-                  dangerouslySetInnerHTML={{ __html: text }}
-                  style={computedStyles}
-                ></p>
+      content = (
+        <p
+          dangerouslySetInnerHTML={{ __html: text }}
+          style={computedStyles}
+        ></p>
+      );
     }
 
     return content;

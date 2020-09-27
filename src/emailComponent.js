@@ -1,33 +1,30 @@
 import React from 'react';
 
-import Img from "./Blocks/Img";
-import Link from "./Blocks/Link";
-import Paragraph from "./Blocks/Paragraph";
-import Quote from "./Blocks/Quote";
-import Signature from "./Blocks/Signature";
-import Title from "./Blocks/Title";
-import Unsubscribe from "./Blocks/Unsubscribe";
+import {
+  Img,
+  Paragraph,
+  Title,
+  Unsubscribe,
+  Cell,
+  Row,
+  Table,
+  ViewRoot,
+  hasher,
+} from "./internals";
 
-import Table from "./Utils/Table";
-import Row from "./Utils/Row";
-import Cell from "./Utils/Cell";
-
-export default class emailComponent extends React.Component {
-  // constructor(props) {
-  //   super(props)
-  // }
-
+export class emailComponent extends React.Component {
   tableLevel = false
 
   defaultStyle = {};
 
-  static selfAssemble(block, isText, shorthand = this.tableLevel) {
+  static selfAssemble(block, isText, user, shorthand = this.tableLevel) {
     return React.createElement(this, {
       content: block.content ?? block.c ?? {},
       data: block.data ?? block.d ?? {},
       style: block.style ?? block.s ?? this.defaultStyle ?? {},
       shorthand: block.data?.__shorthand ?? shorthand,
       isText: isText,
+      user: user
     });
   }
 
@@ -35,78 +32,95 @@ export default class emailComponent extends React.Component {
     if (typeof content === "undefined" || content === null) {
         return;
     }
-
-    const children = content.map((block) => {
+    return content.map((block) => {
       let output;
       let shorthand = this.tableLevel;
       switch (block.type ?? block.t) {
-        case ("table", "tbl", "t"):
+        case "table":
+        case "tbl":
+        case "t":
           shorthand = false;
-        case ("Table", "Tbl", "T"):
-          output = Table.selfAssemble(block, this.props.isText, shorthand);
+        case "Table":
+        case "Tbl":
+        case "T":
+          output = Table.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
-        case ("row", "tr", "r"):
+        case "row": 
+        case "tr":
+        case "r":
           shorthand = false;
-        case ("Row", "Tr", "R"):
-          output = Row.selfAssemble(block, this.props.isText, shorthand);
+        case "Row":
+        case  "Tr":
+        case  "R":
+          output = Row.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
-        case ("cell", "c", "td"):
+        case "cell":
+        case  "c":
+        case  "td":
           shorthand = false;
-        case ("Cell", "C", "Td"):
-          output = Cell.selfAssemble(block, this.props.isText, shorthand);
+        case "Cell":
+        case  "C":
+        case  "Td":
+          output = Cell.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
         case "img":
           shorthand = false;
         case "Img":
-          output = Img.selfAssemble(block, this.props.isText, shorthand);
+          output = Img.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
         case "link":
           shorthand = false;
         case "Link":
-          output = Link.selfAssemble(block, this.props.isText, shorthand);
+          output = Link.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
-        case ("paragraph", "p"):
+        case "paragraph":
+        case  "p":
           shorthand = false;
-        case ("Paragraph", "P"):
-          output = Paragraph.selfAssemble(block, this.props.isText, shorthand);
+        case "Paragraph":
+        case  "P":
+          output = Paragraph.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
         case "quote":
           shorthand = false;
         case "Quote":
-          output = Quote.selfAssemble(block, this.props.isText, shorthand);
+          output = Quote.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
         case "signature":
           shorthand = false;
         case "Signature":
-          output = Signature.selfAssemble(block, this.props.isText, shorthand);
+          output = Signature.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
         case "title":
           shorthand = false;
         case "Title":
-          output = Title.selfAssemble(block, this.props.isText, shorthand);
+          output = Title.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
         case "unsubscribe":
           shorthand = false;
         case "Unsubscribe":
-          output = Unsubscribe.selfAssemble(block, this.props.isText, shorthand);
+          output = Unsubscribe.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
-        case ("html", "raw"):
+        case "html":
+        case  "raw":
           shorthand = false;
-        case ("Html", "HTML", "Raw"):
-          output = Html.selfAssemble(block, this.props.isText, shorthand);
+        case "Html":
+        case  "HTML":
+        case  "Raw":
+          output = Html.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
         default:
+          console.log("Unrecognized type, Skipping", (block.type ?? block.t))
           output = null;
       }
       return output;
