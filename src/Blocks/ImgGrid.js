@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ImgGrid extends React.Component {
+export class ImgGrid extends React.Component {
   constructor(props) {
     super(props);
     

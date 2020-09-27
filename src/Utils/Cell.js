@@ -1,7 +1,7 @@
 import React from "react";
-import emailComponent from "../emailComponent";
+import { emailComponent } from "../internals";
 
-export default class Cell extends emailComponent {
+export class Cell extends emailComponent {
   constructor(props) {
     super(props);
   }
@@ -13,7 +13,6 @@ export default class Cell extends emailComponent {
 
   render() {
     let children = this.props.children ?? this.parseContent(this.props.content);
-
     let output;
     if (this.props.isText) {
       output = <>{children}</>;

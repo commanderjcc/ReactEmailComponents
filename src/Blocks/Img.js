@@ -1,16 +1,13 @@
 import React from "react";
 
-import Table from "../Utils/Table";
-import Row from "../Utils/Row";
-import Cell from "../Utils/Cell";
-import emailComponent from "../emailComponent";
+import { emailComponent, Table, Row, Cell } from "../internals";
 
-export default class Img extends emailComponent {
+export class Img extends emailComponent {
   constructor(props) {
     super(props);
   }
 
-  static selfAssemble(block, isText, shorthand = this.tableLevel) {
+  static selfAssemble(block, isText, user, shorthand = this.tableLevel) {
     let saved_shorthand = shorthand;
     if (shorthand === "table") {
       shorthand = false;
@@ -22,6 +19,7 @@ export default class Img extends emailComponent {
       style: block.style ?? block.s ?? this.defaultStyle ?? {},
       shorthand: block.data?.__shorthand ?? shorthand,
       saved_shorthand: saved_shorthand,
+      user: user,
       isText: isText,
     });
   }

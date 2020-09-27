@@ -1,9 +1,10 @@
 import React from 'react';
-import emailComponent from '../emailComponent';
+import { emailComponent } from "../internals";
 
-export default class Unsubscribe extends emailComponent {
+export class Unsubscribe extends emailComponent {
   defaultStyle = {
     p: {
+      textAlign: "center",
       fontFamily:
         "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
       fontWeight: 400,
@@ -18,10 +19,6 @@ export default class Unsubscribe extends emailComponent {
   };
 
   render() {
-    if (!this.props.user?.airtableID) {
-      return null;
-    }
-
     let computedStyles = {
       p: {
         ...this.defaultStyle.p,
@@ -46,6 +43,21 @@ export default class Unsubscribe extends emailComponent {
         ...this.props.style?.register,
       },
     };
+    
+    if (!this.props.user?.airtableID) {
+      return (
+        <p style={computedStyles.p}>
+          Got this as a forward?{" "}
+          <a
+            style={computedStyles.register}
+            href="https://airtable.com/shrYmEsnvb3AHP8sq"
+          >
+            Sign up
+          </a>
+        </p>
+      );
+    }
+
 
     let output;
     if (this.props.isText) {
@@ -53,10 +65,10 @@ export default class Unsubscribe extends emailComponent {
         <>
           Don't want to receive emails anymore? Unsubscribe by visiting{" "}
           {"https://email-settings.josh.christen.se/?unsub=1&id=" +
-            this.props.user.airtableID}
+            this.props.user?.airtableID}
           \nWant fewer emails? Use this link:{" "}
           {"https://email-settings.josh.christen.se/?id=" +
-            this.props.user.airtableID}{" "}
+            this.props.user?.airtableID}{" "}
           Change frequency
         </>
       );
@@ -68,7 +80,7 @@ export default class Unsubscribe extends emailComponent {
             style={computedStyles.unsubscribe}
             href={
               "https://email-settings.josh.christen.se/?unsub=1&id=" +
-              this.props.user.airtableID
+              this.props.user?.airtableID
             }
           >
             Unsubscribe
@@ -79,7 +91,7 @@ export default class Unsubscribe extends emailComponent {
             style={computedStyles.update}
             href={
               "https://email-settings.josh.christen.se/?id=" +
-              this.props.user.airtableID
+              this.props.user?.airtableID
             }
           >
             Change frequency
