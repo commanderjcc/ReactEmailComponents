@@ -1,14 +1,12 @@
 {
-  "name": "reactemailcomponents",
-  "version": "0.0.1",
+  "name": "eldercreactemailcomponents",
+  "version": "0.0.2",
   "description": "A package containing React Components to be used in other projects.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "npm run compile && npm run compile-test && npm run build-test",
     "compile": "babel src -d lib",
-    "build": "webpack --config webpack.config.js",
-    "compile-test": "babel test/src -d test/lib",
-    "build-test": "webpack --config testing-webpack.config.js"
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",

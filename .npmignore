@@ -1,0 +1,6 @@
+lib/*
+src/*
+node_modules/*
+README.md
+webpack.config.js
+.babelrc.json
