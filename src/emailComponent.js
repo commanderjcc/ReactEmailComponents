@@ -8,8 +8,6 @@ import {
   Cell,
   Row,
   Table,
-  ViewRoot,
-  hasher,
 } from "./internals";
 
 export class emailComponent extends React.Component {

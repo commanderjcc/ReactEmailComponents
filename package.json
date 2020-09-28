@@ -1,6 +1,6 @@
 {
   "name": "eldercreactemailcomponents",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "A package containing React Components to be used in other projects.",
   "main": "dist/index.js",
   "scripts": {
