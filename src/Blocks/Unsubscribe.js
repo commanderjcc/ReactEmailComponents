@@ -50,7 +50,7 @@ export class Unsubscribe extends emailComponent {
           Got this as a forward?{" "}
           <a
             style={computedStyles.register}
-            href="https://airtable.com/shrYmEsnvb3AHP8sq"
+            href="https://airtable.com/shr40fukukWGw0ZGN"
           >
             Sign up
           </a>
