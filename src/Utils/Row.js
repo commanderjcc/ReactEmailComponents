@@ -21,7 +21,9 @@ export class Row extends emailComponent {
     let content = children.map((element) => {
       if (element.props?.shorthand) {
         return (
-          <Cell isText={this.props.isText}>{element}</Cell>
+          <Cell style={{ columnSpan: 999 }} isText={this.props.isText}>
+            {element}
+          </Cell>
         );
       } else {
         return element;

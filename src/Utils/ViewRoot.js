@@ -29,7 +29,7 @@ export class ViewRoot extends emailComponent {
       if (element?.props?.shorthand) {
         return (
           <Row isText={this.props.isText}>
-            <Cell isText={this.props.isText}>{element}</Cell>
+            <Cell style={{columnSpan: 999}} isText={this.props.isText}>{element}</Cell>
           </Row>
         );
       } else {
