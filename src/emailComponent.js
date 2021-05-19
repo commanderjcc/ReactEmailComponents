@@ -11,7 +11,9 @@ import {
 } from "./internals";
 
 export class emailComponent extends React.Component {
-  tableLevel = false
+  tableLevel = false;
+
+  holdsRestrictedInfo = false;
 
   defaultStyle = {};
 
@@ -20,7 +22,7 @@ export class emailComponent extends React.Component {
       content: block.content ?? block.c ?? {},
       data: block.data ?? block.d ?? {},
       style: block.style ?? block.s ?? this.defaultStyle ?? {},
-      shorthand: block.data?.__shorthand ?? shorthand,
+      shorthand: block.data?.__shorthand ?? block.d?.__shorthand ?? shorthand,
       isText: isText,
       user: user
     });
