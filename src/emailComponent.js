@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 
 import {
   Img,
@@ -18,7 +18,22 @@ export class emailComponent extends React.Component {
   defaultStyle = {};
 
   static selfAssemble(block, isText, user, shorthand = this.tableLevel) {
+    let restricted = block.r ?? block.restricted ?? false;
+    let privileged = user.privileged ?? false;
+    if (restricted) {
+      defaultStyle = {
+        backgroundColor: "#3f3f3f",
+        borderRadius: "10px",
+        margin: "5px",
+      }
+
+      if (!privileged) {
+        return
+      }
+    }
+
     return React.createElement(this, {
+      restricted: restricted,
       content: block.content ?? block.c ?? {},
       data: block.data ?? block.d ?? {},
       style: block.style ?? block.s ?? this.defaultStyle ?? {},

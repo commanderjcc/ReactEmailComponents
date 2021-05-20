@@ -7,8 +7,11 @@ export class Cell extends emailComponent {
   }
 
   defaultStyle = {
-    columnSpan: 1,
-    rowSpan: 1,
+    ...this.defaultStyle,
+    ...{
+      columnSpan: 1,
+      rowSpan: 1,
+    }
   };
 
   render() {
