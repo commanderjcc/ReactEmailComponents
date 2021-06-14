@@ -148,7 +148,6 @@ export class emailComponent extends React.Component {
           shorthand = false;
         case "Res":
         case "Restricted":
-          console.log("assembling Restricted")
           output = Restricted.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 

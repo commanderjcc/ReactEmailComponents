@@ -42,7 +42,7 @@ export class Restricted extends emailComponent {
         });
     
         if (this.props.isText) {
-          output = <>{content}</>;
+          output = <>**Shhh**\n  {content}\n**UnShhh**</>;
         } else {
           let computedStyle = { ...this.defaultStyle, ...this.props.style };
           output = (
