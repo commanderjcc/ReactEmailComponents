@@ -21,6 +21,9 @@ export class Restricted extends emailComponent {
       };
     
       render() {
+        let privileged = this.props.user?.privileged ?? false;
+        if (!privileged) { return null };
+
         let output;
         let children = this.props.children ?? this.parseContent(this.props.content);
         if (!Array.isArray(children)) {
@@ -42,7 +45,7 @@ export class Restricted extends emailComponent {
         });
     
         if (this.props.isText) {
-          output = <>**Shhh**\n  {content}\n**UnShhh**</>;
+          output = <>**Shhh**\n\n{content}**UnShhh**</>;
         } else {
           let computedStyle = { ...this.defaultStyle, ...this.props.style };
           output = (

@@ -14,8 +14,6 @@ import {
 export class emailComponent extends React.Component {
   tableLevel = false;
 
-  holdsRestrictedInfo = false;
-
   defaultStyle = {};
 
   static selfAssemble(block, isText, user, shorthand = this.tableLevel) {
@@ -23,10 +21,10 @@ export class emailComponent extends React.Component {
     let privileged = user?.privileged ?? false;
     if (restricted) {
       if (!privileged) {
-        return
+        return null;
       }
       
-      return <Restricted>
+      return <Restricted isText={isText} user={user}>
         { 
           React.createElement(this, {
             restricted: restricted,
