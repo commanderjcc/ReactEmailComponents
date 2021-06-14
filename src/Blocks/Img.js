@@ -123,12 +123,12 @@ export class Img extends emailComponent {
     let content = (
       <>
         <Row style={computedStyles.caption?.row} isText={this.props.isText}>
-          <Cell style={computedStyles.caption?.cell}>
+          <Cell style={computedStyles.image?.cell}>
             {image}
           </Cell>
         </Row>
         <Row style={computedStyles.image?.row} isText={this.props.isText}>
-          <Cell style={computedStyles.image?.cell}>
+          <Cell style={computedStyles.caption?.cell}>
             {caption}
           </Cell>
         </Row>
