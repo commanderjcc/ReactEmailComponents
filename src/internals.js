@@ -8,3 +8,4 @@ export * from "./Blocks/Title";
 export * from "./Blocks/Unsubscribe";
 export * from "./Utils/ViewRoot";
 export * from "./Utils/hasher";
+export * from "./Utils/Restricted";

@@ -8,6 +8,7 @@ import {
   Cell,
   Row,
   Table,
+  Restricted
 } from "./internals";
 
 export class emailComponent extends React.Component {
@@ -19,17 +20,25 @@ export class emailComponent extends React.Component {
 
   static selfAssemble(block, isText, user, shorthand = this.tableLevel) {
     let restricted = block.r ?? block.restricted ?? false;
-    let privileged = user.privileged ?? false;
+    let privileged = user?.privileged ?? false;
     if (restricted) {
-      defaultStyle = {
-        backgroundColor: "#3f3f3f",
-        borderRadius: "10px",
-        margin: "5px",
-      }
-
       if (!privileged) {
         return
       }
+      
+      return <Restricted>
+        { 
+          React.createElement(this, {
+            restricted: restricted,
+            content: block.content ?? block.c ?? {},
+            data: block.data ?? block.d ?? {},
+            style: block.style ?? block.s ?? this.defaultStyle ?? {},
+            shorthand: block.data?.__shorthand ?? block.d?.__shorthand ?? shorthand,
+            isText: isText,
+            user: user
+          })
+        }
+      </Restricted>
     }
 
     return React.createElement(this, {
@@ -87,11 +96,11 @@ export class emailComponent extends React.Component {
           output = Img.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
-        case "link":
-          shorthand = false;
-        case "Link":
-          output = Link.selfAssemble(block, this.props.isText, this.props.user, shorthand);
-          break;
+        // case "link":
+        //   shorthand = false;
+        // case "Link":
+        //   output = Link.selfAssemble(block, this.props.isText, this.props.user, shorthand);
+        //   break;
 
         case "paragraph":
         case  "p":
@@ -101,17 +110,17 @@ export class emailComponent extends React.Component {
           output = Paragraph.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
-        case "quote":
-          shorthand = false;
-        case "Quote":
-          output = Quote.selfAssemble(block, this.props.isText, this.props.user, shorthand);
-          break;
+        // case "quote":
+        //   shorthand = false;
+        // case "Quote":
+        //   output = Quote.selfAssemble(block, this.props.isText, this.props.user, shorthand);
+        //   break;
 
-        case "signature":
-          shorthand = false;
-        case "Signature":
-          output = Signature.selfAssemble(block, this.props.isText, this.props.user, shorthand);
-          break;
+        // case "signature":
+        //   shorthand = false;
+        // case "Signature":
+        //   output = Signature.selfAssemble(block, this.props.isText, this.props.user, shorthand);
+        //   break;
 
         case "title":
           shorthand = false;
@@ -125,13 +134,22 @@ export class emailComponent extends React.Component {
           output = Unsubscribe.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
-        case "html":
-        case  "raw":
+        // case "html":
+        // case  "raw":
+        //   shorthand = false;
+        // case "Html":
+        // case  "HTML":
+        // case  "Raw":
+        //   output = Html.selfAssemble(block, this.props.isText, this.props.user, shorthand);
+        //   break;
+
+        case "res":
+        case "restricted":
           shorthand = false;
-        case "Html":
-        case  "HTML":
-        case  "Raw":
-          output = Html.selfAssemble(block, this.props.isText, this.props.user, shorthand);
+        case "Res":
+        case "Restricted":
+          console.log("assembling Restricted")
+          output = Restricted.selfAssemble(block, this.props.isText, this.props.user, shorthand);
           break;
 
         default:

@@ -9,6 +9,7 @@ import {
   Table,
   ViewRoot,
   hasher,
+  Restricted
 } from "./internals";
 
 let REC = {
@@ -22,6 +23,7 @@ let REC = {
   ViewRoot: ViewRoot,
   hasher: hasher,
   emailComponent: emailComponent,
+  Restricted: Restricted
 };
 
 export default REC; 
@@ -37,4 +39,5 @@ export {
   ViewRoot,
   hasher,
   emailComponent,
+  Restricted
 };
